@@ -10,36 +10,4 @@ definePageMeta({
   layout: "blank",
 });
 useAuthenticator().fetchLogin();
-// onMounted(async () => {
-//   try {
-//     await useAuthenticator().fetchLogin(); // Birinci fetchLogin çağırılır
-//     await useUsers().fetchUserData(); // fetchLogin bitdikdən sonra fetchUserData çağırılır
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// });
-// definePageMeta({
-//   middleware: ["guest"],
-// });
-
-// methods: {
-// login(data) {
-//   process.browser &&
-//     this.$store
-//       .dispatch("auth/login", data)
-//       .then((res) => {
-//         this.$store.dispatch("auth/getUserDetail").then((response) => {
-//           const redirect = Cookies.get("redirect");
-//           if (redirect) {
-//             Cookies.remove("redirect");
-//             location.href = redirect;
-//           } else {
-//             this.$router.push("/");
-//           }
-//         });
-//       })
-//       .catch(() => {
-//         this.$router.push("/");
-//       });
-// },
 </script>

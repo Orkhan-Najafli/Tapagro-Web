@@ -15,7 +15,6 @@ export default {
   product_compare: "Məhsulların müqayisəsi",
   region: "Bölgə seçin",
   region_title: "Bölgə",
-  log_out: "Çıxış",
   my_account: "Hesabım",
   login: "Daxil ol",
   website_title: "Təsərrüfatınız üçün hər şey bir ünvanda",
@@ -74,7 +73,6 @@ export default {
   discounted: "Endirimli",
   district: "Rayon",
   search_the_region: "Rayonu axtar",
-  store: "Mağaza",
   search_the_store: "Mağazanı axtar",
   rating_title: "Reytinq",
   and_more_than_four: " və daha çox",
@@ -124,7 +122,6 @@ export default {
     "Noyabr",
     "Dekabr",
   ],
-  product_evaluation: "Məhsulun qiymətləndirilməsi",
   product_review: "Məhsul haqqında rəy",
   symbol_title: "simvol",
   picture_title: "Şəkil",
@@ -160,12 +157,10 @@ export default {
   show_less: "Daha az göstər",
   no_products_have_been_added_to_my_favorites:
     "Bəyəndiklərim bölməsinə məhsul əlavə edilməyib",
-  no_products_matching_your_search_were_found:
-    "Axtarışa uyğun məhsul tapılmadı",
   the_product_has_been_to_the_comparison: "Məhsul müqayisəyə əlavə olundu",
   the_product_has_been_added_to_my_favorites:
     "Məhsul bəyəndiklərimə əlavə olundu",
-  my_favorites_section: "Bəyəndiklərim bölümü ->",
+  my_favorites_section: "Bəyəndiklərim bölümü ",
   comparison_section: "Müqayisə bölümü ->",
   no_farmer_matching_the_search_was_found: "Axtarışa uyğun fermer tapılmadı",
   other_ads_from_the_farmer: "Fermerin diger elanları",
@@ -235,7 +230,6 @@ export default {
   ad: "Elan №",
   ad_name: "Elanın adı",
   image: "Şəkli",
-  publication_date: "Dərc edilmə tarixi",
   status_in_table: "Status",
   back: "Geri",
   deactivate: "Deaktiv et",
@@ -299,17 +293,17 @@ export default {
   you_must_select_a_unit_of_measure: "Ölçü vahidi seçməyiniz zəruridir",
   product_more_description:
     "Məhsulunuzu mümkün qədər ətraflı təsvir edin, xatırladırıq ki, elanın təsvirində əlaqə nömrəsi və digər saytların linklərini yerləşdirmək qadağandır.",
-  // ad_use_rules:
-  //   "Elan yerləşdirərək, siz saytın <a class='text-[#16A34A] hover:text-[#16A34A] focus:hover:text-[#16A34A]'> istifadə qaydaları </a> ilə razı olduğunuzu təsdiq edirsiniz.",
+  ad_use_rules:
+    "Elan yerləşdirərək, siz saytın <a class='text-[#16A34A] hover:text-[#16A34A] focus:hover:text-[#16A34A]'> istifadə qaydaları </a> ilə razı olduğunuzu təsdiq edirsiniz.",
   create_an_ad: "Elanı yarat",
   enter_a_valid_phone_number:
     "Düzgün telefon nömrəsi daxil edin (məs: 501234567)",
-  advertisement_texts: [
-    "Eyni elanı bir neçə dəfə təqdim etməyin",
-    "Təsvir və ya şəkillərdə telefon, email və ya sayt ünvanı qeyd etməyin",
-    "Əlaqə məlumatlarınızı dəqiq qeyd etdiyinizdən əmin olun",
-    "Elanınız moderator yoxlamasından keçdikdən sonra saytda dərc olunacaq",
-  ],
+  advertisement_texts: {
+    item0: "Eyni elanı bir neçə dəfə təqdim etməyin",
+    item1:"Təsvir və ya şəkillərdə telefon, email və ya sayt ünvanı qeyd etməyin",
+    item2:"Əlaqə məlumatlarınızı dəqiq qeyd etdiyinizdən əmin olun",
+    item3:"Elanınız moderator yoxlamasından keçdikdən sonra saytda dərc olunacaq",
+  },
   error: "Xəta",
   contact_the_farmer: "Fermerlə əlaqə",
   number_of_views: "Baxış sayı",
@@ -352,7 +346,6 @@ export default {
   points_of_sale_where_the_product_is_available:
     "Məhsulun mövcud olduğu satış nöqtələri",
   delivery_areas: "Çatdırılma əraziləri",
-  ad: "elan",
   it_does: "Edir",
   it_does_not: "Etmir",
   history: "Tarixçə",
@@ -380,4 +373,18 @@ export default {
   copy_of_bank_details_on_your_business_account:
     "Sahibkarlıq hesabınıza dair bank rekvizitlərinin surəti",
   directors_ID_card_copy: "Direktorun şəxsiyyət vəsiqəsinin surəti.",
+  something_went_wrong: "Nəsə səhv baş verdi, zəhmət olmasa, yenidən cəhd edin.",
+
+  //validation
+  min: "Bu sahənin uzunluğu ən az {min} simvoldan ibarət olmalıdır.",
+  max: "Bu sahənin uzunluğu ən çox {max} simvoldan ibarət olmalıdır.",
+  between: "Bu sahənin uzunluğu yalnız {min} və {max} arası olmalıdır.",
+  alpha_spaces:
+    "Bu sahə yalnız hərflərdən və ara simvolundan (space) ibarət olmalıdır.",
+  required: "Bu sahəni doldurmaq zəruridir.",
+  numeric: `Bu sahə yalnız tam rəqəmlərdən ibarət olmalıdır.`,
+  digits: "Bu sahə {length} rəqəmdən ibarət olmalıdır.",
+  email: "{email} düzgün formatda daxil olunmalıdır.",
+  your_listing_will_be_featured_in_the_VIP_Farmer_Products_catalog_for_30_days:'Elanınız 30 gün müddətində \'VIP fermer məhsulları\' kataloqunda təsvir olunacaq.',
+  decimal:"Bu sahə yalnız rəqəmlərdən və nöqtədən sonra {decimals} onluq ədəddən ibarət olmalıdır."
 };

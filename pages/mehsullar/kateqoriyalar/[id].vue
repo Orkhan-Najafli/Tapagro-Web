@@ -277,7 +277,9 @@ const checkSearch = computed(() => {
 if (useRoute().params.id === "fermer-mehsullari") {
   useFarmerCategoriesStore().fetchCategories();
 } else {
-  useCategoriesStore().fetchCategories(Number(useCookie("categoryID").value));
+  useCategoriesStore().fetchCategories(
+    Number(ref(useCookie("categoryID")).value)
+  );
 }
 
 useProductsStore().resetProducts();
@@ -293,7 +295,7 @@ useProductsStore().fetchProducts({
 });
 const loadMoreProducts = function () {
   queryParams.page++;
-  queryParams.size = 2;
+  queryParams.size = 12;
   useRouter().push({ query: { ...useRoute().query, page: queryParams.page } });
 };
 const filter = function (value: any, oldValue: any) {

@@ -1,0 +1,91 @@
+### **reCAPTCHA v3 necə işləyir?**
+
+Google **reCAPTCHA v3**, veb saytınızı botlardan və zərərli fəaliyyətlərdən qorumaq üçün hazırlanmış bir təhlükəsizlik sistemidir. Əsas fərqi odur ki, istifadəçidən bir klik etməsini tələb etmir ("Mən robot deyiləm" düyməsi yoxdur). Bunun əvəzinə, istifadəçinin veb saytla qarşılıqlı əlaqəsini avtomatik olaraq analiz edir və nəticədə **risk balı** (score) təqdim edir.
+
+---
+
+### **Necə işləyir?**
+
+1. **İnteqrasiya və Yerləşdirmə**:
+   - Veb saytınıza **Google reCAPTCHA API açarlarını** daxil edirsiniz (site key və secret key).
+   - reCAPTCHA istifadə edilən səhifələrə JavaScript kitabxanası yüklənir və reCAPTCHA avtomatik olaraq arxa planda fəaliyyət göstərir.
+
+2. **İstifadəçinin Davranışını Təhlil Etmək**:
+   - İstifadəçi səhifəni ziyarət etdikdə, reCAPTCHA onların fəaliyyətlərini (maus hərəkətləri, kliklər, səhifədə nə qədər qalma vaxtı, klaviatura istifadə qaydası və s.) analiz edir.
+   - reCAPTCHA v3 bu davranışları öyrənərək istifadəçinin insan və ya bot olduğunu təyin etməyə çalışır.
+
+3. **Risk Balı Təqdim Edir**:
+   - İstifadəçi bir hərəkət etdikdə (məsələn, formu göndərdikdə), reCAPTCHA **0.0 ilə 1.0** arasında bir bal qaytarır:
+     - **1.0**: İnsan olduğuna çox əmindir.
+     - **0.0**: Bot olduğuna çox əmindir.
+   - Siz bu balı backend-də yoxlayaraq qərar verirsiniz: 
+     - Bal yüksəkdirsə, istifadəçinin əməliyyatına icazə verilir.
+     - Bal aşağıdırsa, əlavə yoxlama (məsələn, iki faktorlu autentifikasiya) tələb edə bilərsiniz.
+
+4. **Backend Təsdiqi**:
+   - reCAPTCHA tokenini backend-ə göndərirsiniz.
+   - Backend-də bu tokeni Google reCAPTCHA API ilə yoxlayırsınız.
+   - Google API, bu tokenin etibarlılığını və balını təsdiq edir.
+
+---
+
+### **Necə İnteqrasiya Etməli?**
+
+#### **Frontend-də:**
+1. **HTML/JavaScript Kitabxanasını əlavə edin**:
+   ```html
+   <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+   ```
+
+2. **Token yaradın və göndərin**:
+   ```javascript
+   grecaptcha.ready(() => {
+       grecaptcha.execute('YOUR_SITE_KEY', { action: 'submit' }).then((token) => {
+           // Tokeni backend-ə göndərin
+           console.log('reCAPTCHA token:', token);
+       });
+   });
+   ```
+
+#### **Backend-də:**
+1. **Tokeni təsdiq edin**:
+   - Google API vasitəsilə tokeni təsdiq edirsiniz:
+     ```bash
+     POST https://www.google.com/recaptcha/api/siteverify
+     ```
+   - Parametrlər:
+     - `secret`: Sizin **SECRET_KEY**.
+     - `response`: Frontend-dən aldığınız token.
+
+   **Nümunə cavab**:
+   ```json
+   {
+     "success": true,
+     "score": 0.9,
+     "action": "submit"
+   }
+   ```
+
+2. **Risk Balına Əsaslanaraq Qərar Verin**:
+   - `score` dəyərinə görə:
+     - Yüksək bal → Prosesi davam etdirin.
+     - Aşağı bal → Əlavə yoxlama tələb edin.
+
+---
+
+### **Üstünlükləri**
+- **İstifadəçi rahatlığı**: Görünən heç bir əlavə təsdiq tələb olunmur.
+- **Daha az müdaxilə**: İstifadəçilər üçün proses sürətli və sadədir.
+- **Botlarla mübarizə**: Daha ağıllı alqoritm vasitəsilə botları aşkar edir.
+
+---
+
+### **reCAPTCHA v3-ün Məhdudiyyətləri**
+- **Təkcə Bal Sistemidir**: Dəqiq təsdiq etmək üçün əlavə yoxlama tələb oluna bilər.
+- **Yanlış Pozitivlər**: Zaman-zaman insan istifadəçilər də bot kimi görünə bilər.
+- **Doğru Konfiqurasiya Tələb Olunur**: Bal əsasında düzgün tədbirlər görmək üçün backend-də yaxşı alqoritm lazımdır.
+
+---
+
+### **Nəticə**
+reCAPTCHA v3 istifadəçiləri narahat etmədən botlardan qorumaq üçün müasir və güclü bir üsuldur. Siz frontend-də tokeni yaradır, backend-də isə balı yoxlayıb qərar qəbul edirsiniz. Bu sistemi düzgün tətbiq etdikdə həm təhlükəsizlik artır, həm də istifadəçi təcrübəsi yaxşılaşır.

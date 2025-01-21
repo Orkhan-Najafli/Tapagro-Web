@@ -114,6 +114,77 @@
   </div>
 </template>
 <script setup lang="ts">
+useHead({
+  title: "Məhsullar",
+  meta: [
+    { name: "robots", content: "index, follow" },
+    {
+      hid: "description",
+      name: "description",
+      content:
+        "Tapagro vebsaytında müxtəlif kənd təsərrüfatı məhsullarını kəşf edin. Yüksək keyfiyyətli və etibarlı məhsullar burada.",
+    },
+    {
+      hid: "keywords",
+      name: "keywords",
+      content:
+        "məhsullar, kənd təsərrüfatı məhsulları, tapagro, yüksək keyfiyyətli məhsullar, etibarlı məhsullar, mehsullar, kend mehsullari, organik mehsullar, yuksek keyfiyyetli mehsullar, kend teserrufati mehsullari",
+    },
+    {
+      hid: "og:title",
+      name: "og:title",
+      content: "Məhsullar - Tapagro",
+    },
+    {
+      hid: "og:description",
+      name: "og:description",
+      content:
+        "Tapagro vebsaytında müxtəlif kənd təsərrüfatı məhsullarını kəşf edin. Yüksək keyfiyyətli və etibarlı məhsullar burada.",
+    },
+    {
+      hid: "og:type",
+      name: "og:type",
+      content: "website",
+    },
+    {
+      hid: "og:url",
+      name: "og:url",
+      content: "https://tapagro.az/mehsullar",
+    },
+  ],
+  link: [
+    {
+      rel: "canonical",
+      href: "https://tapagro.az/mehsullar",
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "Məhsullar",
+        // "image": "https://tapagro.az/images/mehsullar.jpg",
+        description:
+          "Tapagro vebsaytında müxtəlif kənd təsərrüfatı məhsullarını kəşf edin. Yüksək keyfiyyətli və etibarlı məhsullar burada.",
+        brand: {
+          "@type": "Brand",
+          name: "Tapagro",
+        },
+        offers: {
+          "@type": "Offer",
+          url: "https://tapagro.az/mehsullar",
+          priceCurrency: "AZN",
+          price: "12", // Dynamic price can be added here
+          itemCondition: "https://schema.org/NewCondition",
+          availability: "https://schema.org/InStock",
+        },
+      }),
+    },
+  ],
+});
+
 definePageMeta({
   layout: "hero",
 });
@@ -161,7 +232,7 @@ useProductsStore().fetchProducts({
 });
 const loadMoreProducts = function () {
   queryParams.page++;
-  queryParams.size = 2;
+  queryParams.size = 12;
   useRouter().push({ query: { ...useRoute().query, page: queryParams.page } });
 };
 const filter = function (value: any, oldValue: any) {

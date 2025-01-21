@@ -5,9 +5,12 @@ export interface ReviewDetail {
   id: number;
   rating: number;
   comment: string;
+  name?: string;
+  thumbnailPath?: string;
   photos: Array<{
     id: number;
-    path: string;
+    path?: string;
+    data?: string;
   }>;
   status: {
     label: string;
@@ -42,6 +45,10 @@ export interface Review {
     label: string;
     status: string;
   };
+}
+export interface DeleteReview {
+  rating: number;
+  status: string;
 }
 export interface ReviewSummary {
   reviews: Array<{ rating: number; count: number; percentage: number }>;

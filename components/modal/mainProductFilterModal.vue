@@ -11,7 +11,7 @@
         <filter_logo class="ml-2 mt-2" />
       </div>
     </template>
-    <MainProductFilter :mobile="false" style="" class="" />
+    <MainProductFilter :mobile="false" />
     <template #footer>
       <div class="flex flex-col justify-between items-center pt-5 mt-5">
         <button

@@ -42,16 +42,33 @@
   </div>
 </template>
 <script setup lang="ts">
+let props = defineProps({
+  farmer: {
+    type: Boolean,
+  },
+});
 const { t } = useI18n();
-let list = reactive([
-  { name: t("sort_by"), value: "default" },
-  { name: t("by_date"), value: "createdAt-DESC" },
-  { name: t("rating"), value: "averageRating" },
-  { name: t("price_low_to_high"), value: "price-ASC" },
-  { name: t("price_high_to_low"), value: "price-DESC" },
-  { name: t("discount"), value: "ecommerceDiscount" },
-]);
-const sortByData = ref("default");
+let list = props.farmer
+  ? reactive([
+      { name: t("sort_by"), value: "default" },
+      { name: t("by_date"), value: "createdAt-DESC" },
+      // { name: t("rating"), value: "averageRating" },
+      { name: t("price_low_to_high"), value: "price-ASC" },
+      { name: t("price_high_to_low"), value: "price-DESC" },
+      // { name: t("discount"), value: "ecommerceDiscount " },
+    ])
+  : reactive([
+      { name: t("sort_by"), value: "default" },
+      { name: t("by_date"), value: "createdAt-DESC" },
+      { name: t("rating"), value: "averageRating" },
+      { name: t("price_low_to_high"), value: "price-ASC" },
+      { name: t("price_high_to_low"), value: "price-DESC" },
+      { name: t("discount"), value: "ecommerceDiscount" },
+    ]);
+
+const sortByData = ref(
+  useRoute().query.sortBy ? useRoute().query.sortBy : "default"
+);
 const showOrderMenu = ref(false);
 const regex = new RegExp("fermer");
 

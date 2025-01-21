@@ -1,14 +1,19 @@
 export interface User {
-  firstName: string;
-  lastName: string;
-  fatherName: string;
+  cityId?:undefined
+  // emailAddress?:undefined
+  // phoneNumber?:undefined
+
+  firstName?: string;
+  lastName?: string;
+  fatherName?: string;
   contactDetails: {
-    phoneNumber: string;
-    emailAddress: string;
+    phoneNumber?: string;
+    emailAddress?: string;
   };
   city: {
-    id: number;
-    name: string;
+    id: number | undefined;
+    name: string | undefined;
   };
-  storeName: string;
+  storeName: string | undefined;
+
 }

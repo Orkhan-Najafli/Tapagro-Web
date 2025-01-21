@@ -12,7 +12,7 @@
       >
         <img
           class="w-full h-full"
-          :src="`${baseURL}${props.store.logoPath}`"
+          :src="`${baseURL}/${props.store.logoPath}`"
           @error="setDefaultStoreImage"
           :alt="store.name"
         />
@@ -35,20 +35,21 @@
 <script setup lang="ts">
 import type { Store } from "~/utils/types/stores";
 
-// variables
-const baseURL = useRuntimeConfig().public.baseURL;
-
-// methods
-const setDefaultStoreImage = function (event: Event | any) {
-  // event.target.src = import(`@/assets/img/store_logo.svg`);
-  event.target.className = "p-1";
-};
 let props = defineProps({
   store: {
     type: Object as PropType<Store>,
     default: new Set(),
   },
 });
+// variables
+const baseURL = useRuntimeConfig().public.baseURL;
+
+// methods
+const defaultImagePath = await import("@/assets/img/store_logo.svg");
+const setDefaultStoreImage = (event: Event | any) => {
+  event.target.src = defaultImagePath.default;
+  event.target.className = "p-2";
+};
 </script>
 
 <style scoped>

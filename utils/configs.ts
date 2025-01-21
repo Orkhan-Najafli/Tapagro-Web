@@ -1,8 +1,9 @@
 export function HeaderConfigs(Authorization?: string | any) {
   return {
-    "Accept-Language": "AZE",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${Authorization}`,
+    "Accept-Language": useCookie("countryCode").value || "AZE",
+    // "Content-Type": "application/json",
+    Accept: "*/*",
+    Authorization: `Bearer ${useCookie("token").value || ""}`,
   };
 }
 

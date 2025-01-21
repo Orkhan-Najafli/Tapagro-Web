@@ -1,9 +1,13 @@
-import { HeaderConfigs } from "@/utils/configs";
+import { HeaderConfigs, parseUrl } from "@/utils/configs";
 import { defineStore } from "pinia";
 import urls from "@/utils/urls.json";
 import { useRuntimeConfig } from "#app";
 import type { ApiBase } from "~/utils/types";
-import type { Farmer } from "~/utils/types/farmer-product";
+import type {
+  Farmer,
+  FarmerContact,
+  FarmerDTO,
+} from "~/utils/types/farmer-product";
 
 export const useFarmersStore = defineStore("farmers", {
   state: () => ({
@@ -12,10 +16,20 @@ export const useFarmersStore = defineStore("farmers", {
     totalPages: 0 as number,
     status: "" as string,
     error: null as null | Error,
+
+    farmer: {} as FarmerDTO,
+    farmerStatus: "" as string,
+
+    farmerContact: {} as FarmerContact,
+    farmerContactStatus: "" as string,
     baseURL: useRuntimeConfig().public.baseURL,
   }),
   getters: {
     getFarmers: (state) => state.farmers,
+    getFarmer: (state) => state.farmer,
+    getFarmerContact: (state) => state.farmerContact,
+    getFarmerStatus: (state) => state.farmerStatus,
+    getFarmerContactStatus: (state) => state.farmerContactStatus,
     getTotalElements: (state) => state.totalElements,
     getTotalPages: (state) => state.totalPages,
     getStatus: (state) => state.status,
@@ -28,13 +42,19 @@ export const useFarmersStore = defineStore("farmers", {
       this.status = "";
       this.error = null;
     },
+    resetFarmerContact() {
+      this.farmerContact = {} as FarmerContact;
+      this.farmerContactStatus = "";
+    },
     async fetchFarmers(queryData: any) {
       const { data, status, error } = await useAsyncData<ApiBase<Farmer>>(
         "farmers",
         () =>
           $fetch(`${this.baseURL}${urls.farmers}`, {
             headers: {
-              ...HeaderConfigs(useCookie("token").value || ""),
+              ...HeaderConfigs({
+                Authorization: useCookie("token").value || "",
+              }),
             },
             query: queryData,
           })
@@ -44,9 +64,45 @@ export const useFarmersStore = defineStore("farmers", {
       data.value?.content.forEach((item: Farmer) => {
         this.farmers.add(item);
       });
-      console.log("status: ", status.value);
-
       this.status = status.value;
+      this.error = error.value;
+    },
+    async fetchFarmer(queryData: any) {
+      const { data, status, error } = await useAsyncData<FarmerDTO>(
+        "farmer",
+        () =>
+          $fetch(`${this.baseURL}${urls.farmer}/${queryData}`, {
+            headers: {
+              ...HeaderConfigs({
+                Authorization: useCookie("token").value || "",
+              }),
+            },
+            // query: queryData,
+          })
+      );
+      this.farmer = data.value!;
+      this.farmerStatus = status.value;
+      this.error = error.value;
+    },
+    async fetchFarmerContact(queryData: any) {
+      const { data, status, error } = await useAsyncData<FarmerContact>(
+        "farmer-contact",
+        () =>
+          $fetch(
+            `${this.baseURL}${parseUrl(urls.farmer_contact, {
+              id: queryData,
+            })}`,
+            {
+              headers: {
+                ...HeaderConfigs({
+                  Authorization: useCookie("token").value || "",
+                }),
+              },
+            }
+          )
+      );
+      this.farmerContact = data.value!;
+      this.farmerContactStatus = status.value;
       this.error = error.value;
     },
   },

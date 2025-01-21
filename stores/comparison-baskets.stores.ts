@@ -25,7 +25,9 @@ export const useComparisonBasketsStore = defineStore("comparison-baskets", {
         () =>
           $fetch(`${this.baseURL}${urls["comparison-baskets-count"]}`, {
             headers: {
-              ...HeaderConfigs(useCookie("token").value || ""),
+              ...HeaderConfigs({
+                Authorization: useCookie("token").value || "",
+              }),
             },
             method: "GET",
           })
@@ -41,7 +43,9 @@ export const useComparisonBasketsStore = defineStore("comparison-baskets", {
         () =>
           $fetch(`${this.baseURL}${urls["comparison-count"]}`, {
             headers: {
-              ...HeaderConfigs(useCookie("token").value || ""),
+              ...HeaderConfigs({
+                Authorization: useCookie("token").value || "",
+              }),
             },
             method: "GET",
           })

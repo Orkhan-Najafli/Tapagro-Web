@@ -283,12 +283,6 @@ const props = defineProps({
 
 useCitiesStore().fetchCities();
 
-// export default {
-//   computed: {
-//     ...mapGetters({
-//       subCategories: "productCategories/categories",
-//       baseCategory: "productCategories/baseCategory",
-//     }),
 const loadCities: any = function (event?: Event | undefined | any) {
   useCitiesStore().resetCities();
   useCitiesStore().fetchCities(`${event.target.value!}`);
@@ -308,7 +302,6 @@ if (useRoute().query) {
     isDiscount.value = queryString.endirimli === "beli";
   }
 }
-//   methods: {
 const pasteNone = function (event: Event) {
   event.preventDefault();
 };

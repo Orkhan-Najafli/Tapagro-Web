@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     tag="a"
-    :to="`/fermerler/${props.data.id}`"
+    :to="`/fermerler/fermer-etraflisi/${props.data.id}`"
     class="flex flex-col justify-between w-full shadow-sm hover:shadow-md rounded-md bg-white border border-gray-200 p-8"
   >
     <div class="flex flex-row items-center">

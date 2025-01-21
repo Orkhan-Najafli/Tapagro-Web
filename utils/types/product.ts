@@ -115,7 +115,8 @@ export interface ProductQuery {
   searchText?: string;
   productCategoryLabels?: string | string[];
   productBaseCategoryLabel?: string;
-  storeIds?: number[];
+  storeIds?: number[] | number;
+  productTypeId?: number;
   cityIds?: number[];
   minPrice?: number;
   maxPrice?: number;

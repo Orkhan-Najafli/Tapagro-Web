@@ -36,7 +36,9 @@ export const useMostPurchasedProductsStore = defineStore(
           () =>
             $fetch(`${this.baseURL}${urls["most-purchased-products"]}`, {
               headers: {
-                ...HeaderConfigs(useCookie("token").value || ""),
+                ...HeaderConfigs({
+                  Authorization: useCookie("token").value || "",
+                }),
               },
               query: queryData,
             })

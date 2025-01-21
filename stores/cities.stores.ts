@@ -30,7 +30,9 @@ export const useCitiesStore = defineStore("cities", {
 
           {
             headers: {
-              ...HeaderConfigs(useCookie("token").value || ""),
+              ...HeaderConfigs({
+                Authorization: useCookie("token").value || "",
+              }),
             },
             method: "GET",
             query: {

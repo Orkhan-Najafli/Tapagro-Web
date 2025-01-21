@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import urls from "@/utils/urls.json";
 import { useRuntimeConfig } from "#app";
 import type { ApiBase } from "~/utils/types";
-import type { FarmerProduct, QueryParams } from "~/utils/types/farmer-product";
+import type {FarmerProduct, QueryParams} from "~/utils/types/farmer-product";
 import { stringify } from "qs";
 export const useFarmerProductsStore = defineStore("farmer-products", {
   state: () => ({
@@ -41,7 +41,7 @@ export const useFarmerProductsStore = defineStore("farmer-products", {
       >("farmer-products", () =>
         $fetch(`${this.baseURL}${urls["farmer-products"]}?${queryString}`, {
           headers: {
-            ...HeaderConfigs(useCookie("token").value || ""),
+            ...HeaderConfigs({ Authorization: useCookie("token").value || "" }),
           },
         })
       );

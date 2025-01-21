@@ -5,7 +5,7 @@
   >
     <div
       class="rounded-md flex flex-col transition-all duration-500 justify-end items-center"
-      v-if="!tapagrobannerShow"
+      v-if="!tapagrobannerShow && useBannerStore().getBanner"
       :style="{
         position: bannerFixed ? 'sticky' : 'relative',
         top: bannerFixed ? top_height : '',
@@ -18,14 +18,14 @@
       >
         <img
           class="bg-image-position"
-          :src="`${baseURL}${useBannerStore().getBanner.path}`"
+          :src="`${baseURL}/${useBannerStore().getBanner.path}`"
           alt=""
         />
       </a>
       <a v-if="!useBannerStore().getBanner.redirectTo">
         <img
           class="bg-image-position"
-          :src="`${baseURL}${useBannerStore().getBanner.path}`"
+          :src="`${baseURL}/${useBannerStore().getBanner.path}`"
           alt=""
         />
       </a>
@@ -42,7 +42,7 @@
     >
       <img
         class="bg-image-position"
-        :src="`${baseURL}${useBannerStore().getBanner.path}`"
+        :src="`${baseURL}/${useBannerStore().getBanner.path}`"
         alt=""
       />
     </nuxt-link>

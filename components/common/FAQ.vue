@@ -13,7 +13,7 @@
     <ul class="grid grid-flow-row divide-y m-0 p-0 w-full h-auto">
       <li
         class="w-full h-auto p-0 m-0 px-6"
-        v-for="(item, index) in faqList"
+        v-for="(item, index) in useFAQStore().getFrequentlyAskedQuestions"
         :key="index"
       >
         <div
@@ -121,26 +121,9 @@
   </div>
 </template>
 <script setup lang="ts">
-//   import { mapGetters } from "vuex";
-
-//   export default {
-//     data() {
-//       return {
-//         // faqList: [],
-//       };
-//     },
-//     created() {
-//       this.$store.dispatch("contentLang/getFAQs");
-//     },
-//     computed: {
-//       ...mapGetters({
-//         faqList: "contentLang/getFaqList",
-//       }),
-//     },
-//     methods: {
-//       showAnswer(index) {
-//         this.faqList[index].visible = !this.faqList[index].visible;
-//       },
-//     },
-//   };
+useFAQStore().fetchFAQ();
+const showAnswer = function (index: number) {
+  useFAQStore().getFrequentlyAskedQuestions[index].visible =
+    !useFAQStore().getFrequentlyAskedQuestions[index].visible;
+};
 </script>
